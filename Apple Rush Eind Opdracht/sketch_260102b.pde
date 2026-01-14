@@ -5,15 +5,17 @@
 //She needs you to collect as many apples as you can before they hit the ground and bruise.
 //As the wind picks up adn the apples begin falling faster, do you think you can keep up?
 //
+//----GLOBAL VRAIABLES----
 PImage bg, basketImg, appleImg;
 float basketX;
 float[] appleX = new float[5];
 float[] appleY = new float[5];
-float appleSpeed = 3;
+float appleSpeed = 1;
 int score = 0;
-int lives = 3;
+int lives = 6;
 boolean gameOver = false;
 
+//----SETUP----
 void setup() {
   size(800, 600);
   
@@ -22,10 +24,11 @@ void setup() {
   basketImg = loadImage("mand.png");
   appleImg = loadImage("appel.png");
   
-  // Resize img
+  // Resize img  resized so that it looks right in comparison with eachother and the BG
   basketImg.resize(100, 100);
   appleImg.resize(40, 40);
   
+  // Spawn the basket in the middle of the screen
   basketX = width / 2;
   
   // spawn appels random hoogte
@@ -34,7 +37,7 @@ void setup() {
     appleY[i] = random(-500, 0); // Spawn buiten beelds
   }
 }
-
+// ----DRAW-----
 void draw() {
   image(bg, 0, 0, width, height);
   
@@ -63,7 +66,7 @@ void playGame() {
     //Collision
     if (appleY[i] + 40 > height - 80 && appleX[i] + 40 > basketX && appleX[i] < basketX + 100) {
       score++;
-      appleSpeed += 0.1; //harder hoe langer het spel door gaat
+      appleSpeed += 0.01; //harder hoe langer het spel door gaat
       resetApple(i);
     }
 
